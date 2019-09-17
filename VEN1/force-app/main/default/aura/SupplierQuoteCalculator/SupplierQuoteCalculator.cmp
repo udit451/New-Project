@@ -309,7 +309,7 @@
                                 </div>
                             <aura:set attribute="else">
                                 <h1 class="slds-p-left_x-small head"
-                                    style="font-size: small;"> Quote Details</h1>
+                                    style="font-size: small;"> Quote Details---</h1>
                                     <div class="demo-only demo-only--sizing slds-grid slds-wrap">
                                         <div class="slds-size_1-of-2 ">
                                             <div class="slds-m-around_x-small">
