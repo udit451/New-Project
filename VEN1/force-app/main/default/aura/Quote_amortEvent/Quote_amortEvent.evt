@@ -1,0 +1,7 @@
+<!--
+ - Created by CA on 12/4/2017.
+ -->
+
+<aura:event type="APPLICATION" description="Quote_amortEvent">
+	<aura:attribute type="object[]" name="amortDataList" />
+</aura:event>

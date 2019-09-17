@@ -1,0 +1,20 @@
+<aura:component description="VendorCustomSettings" implements="force:appHostable,forceCommunity:availableForAllPageTypes,force:hasRecordId,flexipage:availableForAllPageTypes" controller="VendorCustomSettings" access="global">
+    <aura:attribute name="loanFacilityType" type="String" default=""/> 
+    <div class="slds-box_border" >
+        <div class="slds-page-header__row head">
+            <div class="slds-page-header__col-title slds-align_absolute-center head"
+                 style="padding: 15px;font-size: 18px;">
+                <h1><b>Chase Price Configurations</b></h1>
+            </div>
+        </div>
+        <lightning:tabset variant="default" selectedTabId="{!v.loanFacilityType}"
+                          class="slds-p-top_xx-small hideTab ">
+            <lightning:tab label="CHATTEL MORTGAGE" id="Chattel Mortgage"/>
+            <!-- <lightning:tab label="UCCC LOAN" id="Uccc Loan"/>--> 
+            <lightning:tab label="FINANCE LEASE" id="Finance Lease"/>
+            <lightning:tab label="RENTAL - STANDARD" id="Rental - Standard"/>
+            <lightning:tab label="RENTAL - APPLY TO BUY" id="Rental - Apply To Buy"/>
+        </lightning:tabset>
+        <c:VendorCustomGenericSettings loanFacilityType="{!v.loanFacilityType}" showOptionButton="{!v.showOptionButton}"/>
+    </div> 
+</aura:component>

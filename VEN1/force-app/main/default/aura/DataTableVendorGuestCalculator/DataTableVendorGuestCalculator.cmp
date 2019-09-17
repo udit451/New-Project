@@ -1,0 +1,164 @@
+<aura:component description="DataTable" access="global" >
+    <aura:attribute name="sortedBy" type="String"/>
+    <aura:attribute name="sortedDirection" type="String"/>
+    <aura:attribute name="headerBackgroundColor" type="String" default="00000"/>
+    <aura:attribute name="footerBackgroundColor" type="String" default="00000"/>
+    <aura:attribute name="showEntriesPicklistValues" type="String" default="5,10,15"/>
+    <aura:attribute name="showEntriesPicklist" type="String[]" default="['5','10','15']"/>
+    <aura:attribute name="width" type="String"/>
+    <lightning:flexipageRegionInfo width="{!v.width}"/>
+    <aura:attribute name="showEntries" type="String" default="15"/>
+    <aura:attribute name="fromEntries" type="String"/>
+    <aura:attribute name="toEntries" type="String"/>
+    <aura:attribute name="searchString" type="String"/>
+    <aura:attribute name="currentPage" type="String"/>
+    <aura:attribute name="totalPages" type="String"/>
+    <aura:attribute name="currentOpp" type="Object"/>
+    <aura:attribute name="showRecord" type="Boolean" default="false"/>
+    <aura:attribute name="allRecords" type="Object"/>
+    <aura:attribute name="filteredRecords" type="Object"/>
+    <aura:attribute name="tableColumns" type="List"/>
+    <aura:attribute name="tableData" type="Object"/>
+    <aura:attribute name="leadList" type="Object[]"/>
+    <aura:attribute name="selectedId" type="String" />
+    <aura:attribute name="isView" type="Boolean" default="false" />
+    <aura:method name="reInit" action="{!c.doInit_Opportunities}" />
+    <aura:attribute name="totalNumberOfRows" type="Integer"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="calculatorType" type="String" description="It will contain calculator type" default="chase"/>
+
+    <div class="slds-p-around_large">
+        <div class="dataTable">
+            <lightning:layout horizontalAlign="center" multipleRows="true">
+                <div style="{!'width: 100%; background-color:#' + v.headerBackgroundColor+';'}">
+                    <lightning:layoutItem flexibility="auto" size="12" class="slds-text-align_center header-area">
+                        <lightning:layout verticalAlign="center" horizontalAlign="spread" class="width-100">
+                            <lightning:layoutItem flexibility="shrink"
+                                                  class="header-area-1 slds-p-vertical_small slds-text-align_left slds-p-left_small">
+                                Show
+                                <lightning:select label="" name="showEntries" class="show-entries"
+                                                  value="{!v.showEntries}"
+                                                  onchange="{!c.showEntriesChanged}"
+                                                  disabled="{!v.allRecords.length == 0}">
+                                    <aura:iteration items="{!v.showEntriesPicklist}" var="entry">
+                                        <option value="{!entry}">{!entry}</option>
+                                    </aura:iteration>
+                                </lightning:select>
+                                entries
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="shrink"
+                                                  class="header-area-2 slds-p-vertical_small slds-text-align_center slds-truncate">
+                                <strong class="capitalize slds-truncate">{!v.tableHeading}</strong>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="shrink"
+                                                  class="header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small">
+                                <lightning:input class="searchString slds-p-left_small" label="" name="searchString"
+                                                 value="{!v.searchString}"
+                                                 placeholder="Search"
+                                                 disabled="{!v.allRecords.length == 0}"
+                                                 onchange="{!c.searchStringChanged}"/>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </div>
+                <lightning:layoutItem flexibility="auto" size="12" class="slds-text-align_center">
+                    <lightning:datatable data="{! v.tableData }" class="primary-border datatableheight"
+                                         columns="{! v.tableColumns }"
+                                         sortedBy="{!v.sortedBy}"
+                                         sortedDirection="{!v.sortedDirection}"
+                                         keyField="id"
+                                         onrowaction="{! c.handleRowAction }"
+                                         onsort="{!c.updateColumnSorting}"
+                                         hideCheckboxColumn="true"
+                                         showRowNumberColumn="true"/>
+                    <aura:if isTrue="{!v.tableData.length == 0}">
+                        <div class="no-data">
+                            No data available in table
+                        </div>
+                    </aura:if>
+                </lightning:layoutItem>
+                <div style="{!'width: 100%; background-color:#' + v.footerBackgroundColor+';'}">
+                    <lightning:layoutItem flexibility="auto" size="12" class="slds-text-align_center footer-area">
+                        <lightning:layout verticalAlign="center" horizontalAlign="spread" class="width-100">
+                            <lightning:layoutItem flexibility="auto"
+                                                  class="header-area-1 slds-p-vertical_small slds-text-align_left slds-p-left_small slds-truncate">
+                                <aura:if isTrue="{!v.width == 'SMALL'}">
+                                    Showing {!v.fromEntries}-{!v.toEntries} of {!v.filteredRecords.length}.
+                                    <aura:set attribute="else">
+                                        Showing {!v.fromEntries} to {!v.toEntries} out of {!v.filteredRecords.length}
+                                        entries
+                                    </aura:set>
+                                </aura:if>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="auto"
+                                                  class="pages-area header-area-1 slds-p-vertical_small slds-text-align_left slds-p-left_small">
+                                Pages: {!v.currentPage}/{!v.totalPages}
+                            </lightning:layoutItem>
+                            <aura:if isTrue="{!v.calculatorType == 'pronto'}">
+                                    <lightning:layoutItem flexibility="auto"
+                                                  class="{!(v.width == 'SMALL') ? 'slds-hide full-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small' : 'full-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small'}">
+                                <lightning:button label="First" iconPosition="left" variant="brand" iconName="utility:left" class="Cssprontro"
+                                                  disabled="{!v.currentPage &lt;= '1'}" onclick="{!c.goToFirstPage}"/>
+                                <lightning:button label="Previous" iconPosition="left" class="Cssprontro"
+                                                  disabled="{!v.currentPage &lt;= '1'}"
+                                                  iconName="utility:chevronleft" variant="brand" onclick="{!c.goToPreviousPage}"/>
+                                <lightning:button label="Next" iconPosition="right" iconName="utility:chevronright" class="Cssprontro"
+                                                  disabled="{!v.currentPage == v.totalPages}" variant="brand"
+                                                  onclick="{!c.goToNextPage}"/>
+                                <lightning:button label="Last" iconPosition="right" iconName="utility:right" class="Cssprontro"
+                                                  disabled="{!v.currentPage == v.totalPages}" variant="brand"
+                                                  onclick="{!c.goToLastPage}"/>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem flexibility="auto"
+                                                  class="{!(v.width == 'SMALL') ? 'icon-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small' : 'slds-hide icon-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small'}">
+                                <lightning:buttonIcon alternativeText="First" iconName="utility:left" class="Cssprontro"
+                                                      disabled="{!v.currentPage &lt;= '1'}"
+                                                      onclick="{!c.goToFirstPage}"/>
+                                <lightning:buttonIcon alternativeText="Previous" disabled="{!v.currentPage &lt;= '1'}" class="Cssprontro"
+                                                      iconName="utility:chevronleft" onclick="{!c.goToPreviousPage}"/>
+                                <lightning:buttonIcon alternativeText="Next" iconName="utility:chevronright" class="Cssprontro"
+                                                      disabled="{!v.currentPage == v.totalPages}"
+                                                      onclick="{!c.goToNextPage}"/>
+                                <lightning:buttonIcon alternativeText="Last" iconName="utility:right" class="Cssprontro"
+                                                      disabled="{!v.currentPage == v.totalPages}"
+                                                      onclick="{!c.goToLastPage}"/>
+                            </lightning:layoutItem>
+                                    <aura:set attribute="else">
+                                            <lightning:layoutItem flexibility="auto"
+                                            class="{!(v.width == 'SMALL') ? 'slds-hide full-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small' : 'full-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small'}">
+                          <lightning:button label="First" iconPosition="left" variant="brand" iconName="utility:left"
+                                            disabled="{!v.currentPage &lt;= '1'}" onclick="{!c.goToFirstPage}"/>
+                          <lightning:button label="Previous" iconPosition="left"
+                                            disabled="{!v.currentPage &lt;= '1'}"
+                                            iconName="utility:chevronleft" variant="brand" onclick="{!c.goToPreviousPage}"/>
+                          <lightning:button label="Next" iconPosition="right" iconName="utility:chevronright"
+                                            disabled="{!v.currentPage == v.totalPages}" variant="brand"
+                                            onclick="{!c.goToNextPage}"/>
+                          <lightning:button label="Last" iconPosition="right" iconName="utility:right"
+                                            disabled="{!v.currentPage == v.totalPages}" variant="brand"
+                                            onclick="{!c.goToLastPage}"/>
+                      </lightning:layoutItem>
+                      <lightning:layoutItem flexibility="auto"
+                                            class="{!(v.width == 'SMALL') ? 'icon-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small' : 'slds-hide icon-buttons header-area-3 slds-p-vertical_small slds-text-align_right slds-p-right_small'}">
+                          <lightning:buttonIcon alternativeText="First" iconName="utility:left"
+                                                disabled="{!v.currentPage &lt;= '1'}"
+                                                onclick="{!c.goToFirstPage}"/>
+                          <lightning:buttonIcon alternativeText="Previous" disabled="{!v.currentPage &lt;= '1'}"
+                                                iconName="utility:chevronleft" onclick="{!c.goToPreviousPage}"/>
+                          <lightning:buttonIcon alternativeText="Next" iconName="utility:chevronright"
+                                                disabled="{!v.currentPage == v.totalPages}"
+                                                onclick="{!c.goToNextPage}"/>
+                          <lightning:buttonIcon alternativeText="Last" iconName="utility:right"
+                                                disabled="{!v.currentPage == v.totalPages}"
+                                                onclick="{!c.goToLastPage}"/>
+                      </lightning:layoutItem>
+                                    </aura:set>
+                                </aura:if>
+                            
+                        </lightning:layout>
+                    </lightning:layoutItem>
+                </div>
+            </lightning:layout>
+        </div>
+    </div>
+</aura:component>

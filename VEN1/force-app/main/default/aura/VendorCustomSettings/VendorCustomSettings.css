@@ -1,0 +1,52 @@
+/**
+ * Created by Rajat on 10/12/2018.
+ */
+.THIS{
+    background-color: white;
+}
+.THIS .head{
+    color: token(colorTextButtonBrand) !important;
+    background-color: token(colorBrand) !important;
+}
+.THIS .myFieldset {
+    display: block;
+    margin-left: 20px; 
+    margin-right: 20px;
+    margin-top: 20px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: 2px groove;
+
+}
+
+.THIS .myLegend {
+    display: block;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: none;
+}/*
+.THIS .hideTab .slds-tabs_default__content {
+    display: none!important;
+}*/
+
+.THIS .hideTab .slds-tabs_default__item {
+    min-width: 24.3%!important;
+    text-align:center
+}
+/*.THIS .hideTab .slds-tabs_default__overflow-button{
+    display : none !important;
+}*/
+.THIS .hideTab .slds-is-active {
+   animation: shadow 300ms;
+   color: token(colorTextButtonBrand) !important;
+   background-color: token(colorBrand) !important;
+}
+.THIS .inputTerm label{
+   display:none;
+}
+.THIS .comm-page-custom-PAGENAME .cCenterPanel {
+    max-width:100% !important;
+    margin:0
+}

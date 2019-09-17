@@ -1,0 +1,20 @@
+<apex:page id="Calculator_Page" showHeader="false" sideBar="false" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <apex:includeLightning />
+    <div id="Calculator_Div">
+    </div>
+    <script>
+        $Lightning.use("VEN3:Calculator_App", function () {
+            $Lightning.createComponent(
+                    "VEN3:VendorGuestCalculator",
+                    {
+                        "calculatorType":"chase"
+                    },
+                    "Calculator_Div",
+                    function (cmp) {
+
+                    }
+            );
+        });
+    </script> 
+</apex:page>

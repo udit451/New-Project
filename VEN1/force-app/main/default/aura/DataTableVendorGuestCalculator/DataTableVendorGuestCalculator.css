@@ -1,0 +1,83 @@
+.THIS {
+    margin: 0 auto;
+}
+.THIS lightning-datatable .slds-table--header-fixed_container {
+    overflow: hidden;
+}
+.THIS .dataTable {
+    border: 1px solid rgb(212, 212, 212);
+}
+.THIS .header-area, .THIS .footer-area {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+}
+.THIS .header-area-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.THIS .header-area-3 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.THIS .footer-area {
+    border-radius: 0 .25rem 0 .25rem;
+}
+.THIS .primary-border .slds-table--header-fixed_container {
+    border: 1px solid rgb(243, 242, 242);
+    overflow: hidden;
+    color: #000000;
+}
+.THIS .slds-select, .THIS .slds-input {
+    color: #000000;
+}
+.THIS .capitalize {
+    text-transform: capitalize;
+}
+.THIS .show-entries {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
+.THIS .show-entries label {
+    display: none;
+}
+.THIS .show-entries .slds-form-element__control {
+    width: 4rem;
+}
+.THIS .searchString label {
+    display: none;
+}
+.THIS .slds-button_neutral[disabled], .THIS .slds-button--neutral[disabled] {
+    cursor: not-allowed !important;
+}
+.THIS .test {
+    border: 1px solid #000000;
+}
+.THIS .pages-area {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+}
+.THIS .no-data {
+    height: 32px;
+    border: 1px solid rgb(243, 242, 242);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(250, 250, 250);
+}
+.THIS .width-100 {
+    width: 100%;
+}
+.THIS .slds-hide {
+    display: none;
+}
+.THIS .datatableheight .slds-scrollable_y {
+    min-height : 100px;
+}
+.THIS .Cssprontro{
+    background-color: #f04c23 !important;
+    border-color: #f04c23 !important;
+}

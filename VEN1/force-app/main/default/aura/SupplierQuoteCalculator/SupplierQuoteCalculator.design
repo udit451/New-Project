@@ -1,0 +1,3 @@
+<design:component label="VEN3: Supplier Quote Calculator">
+   <!-- <design:attribute name="buttonLabel" label="buttonLabel" description="The label for Quote button" />-->
+</design:component>

@@ -1,0 +1,123 @@
+.THIS{
+}
+
+.THIS .boxCenterDiv{
+    padding-top: 10%;
+    max-width: 55%;
+}
+.THIS .boxDiv{
+    background-color: #3E8BE0;
+    border-radius: 8px;
+    box-shadow: inset 0 3px 30px rgb(100,100,100);
+}
+.THIS .rightLoginDiv{
+    background-color: #fff;
+    border-radius: 0 7px 7px 0;
+}
+
+.THIS .iconClass{
+     position:absolute;
+     padding-top:12px;
+     margin-left:10px;
+}
+.THIS .LoginButton{
+    width: 100%;
+    background: #3F91EB;
+    height: 40px;
+    border-radius: 5px;
+    border : none;
+    color: #fff;
+}
+.THIS .slds-icon-text-default{
+fill : #A8A8A8;
+}
+.THIS#login-container:before{
+    content: "";
+    position: fixed;
+    display: flex;
+    z-index: -1000;
+    opacity: .5;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.THIS .errorDiv{
+    height:40px;
+    background-color:rgb(175, 16, 16);
+    color:#fff;
+    border-top-right-radius: 7px;
+    margin-top : -8px;
+}
+.THIS .noerrorDiv{
+    height:40px;
+    background-color:white;
+    color:#fff;
+    border-top-right-radius: 7px;
+    margin-top : -8px;
+}
+.THIS .inputboxTop{
+    height:40px;
+    padding-left:33px;
+    border-radius: 5px 5px 0 0;
+}
+.THIS .inputboxBottom{
+    height:40px;
+    padding-left:33px;
+    border-radius: 0 0 5px 5px;
+}
+.THIS .matrixLogo{
+    width: 45% !important;
+}
+.THIS .logoutLogo{
+    background-color: #FFF;
+    color: #040413;
+    border: 1px solid #706868;
+}
+.THIS .LoginButtonPronto{
+    width: 100%;
+    background: #f04c23;
+    height: 40px;
+    border-radius: 5px;
+    border : none;
+    color: #fff;
+}
+.THIS .boxDivPronto{
+    background-color: #f04c23;
+    border-radius: 8px;
+    box-shadow: inset 0 3px 30px rgb(100,100,100);
+}
+.THIS .headerCssChase{
+    width:100%;
+    background-color: #3e8be0;
+}
+.THIS .QuoteButtonCssChase{
+    background-color: #3e8be0;
+}
+.THIS .QuoteButtonCssprontro{
+    background-color: #f04c23 !important;
+    border-color: #f04c23 !important;
+}
+.THIS .headerCssPronto{
+    width:100%;
+    background-color: #f04c23;
+}
+.THIS .slds-scope .slds-button--brand{
+    background-color: #f04c23 !important;
+    border-color: #f04c23 !important;
+}
+.THIS .slds-scope .slds-button_brand{
+    background-color: #f04c23 !important;
+    border-color: #f04c23 !important;
+}
+.THIS .CircleheaderCssPronto{
+    width: 60%;
+    background-color: white;
+    padding: 10px;
+  padding: 10px;
+  border-radius: 25px;
+ }
+
+.THIS .footerTIME {
+   margin-top: -9px;
+}

@@ -1,0 +1,338 @@
+<aura:component description="This component will be used on Site to access Chase" access="global"
+                controller="VendorGuestCalculatorController">
+    <aura:attribute name="errorMessage" type="String" default="You are not a valid Chase User"
+                    description="It will contain error string"/>
+    <aura:attribute name="calculatorType" type="String" default="chase"
+                    description="It will contain calcultor type"/>
+    <aura:attribute name="selectedId" type="String" description="It will contain the Id of selected record to view"/>
+    <aura:attribute name="recordId" type="String" description="It will contain the Id of selected record to view"/>
+    <aura:attribute name="editRecordId" type="String" description="It will contain the Id of selected record to view"/>
+    <aura:attribute name="showLoginPage" type="Boolean" default="true"
+                    description="It will be true to show login page"/>
+    <aura:attribute name="showExistingRecords" type="Boolean" default="false"
+                    description="It will be true to show existing records in datatable"/>
+    <aura:attribute name="openCalculator" type="Boolean" default="false"
+                    description="It will be true to show the calculator"/>
+    <aura:attribute name="isView" type="Boolean" default="false"
+                    description="It will be true to show the calculator in Edit mode"/>
+    <aura:attribute name="isLogOut" type="Boolean" default="false"
+                    description="It will be true to show the LogOut button on top right corner"/>
+    <aura:attribute name="Logout" type="Boolean" default="false"
+                    description="It will be true to show the LogOut button on top right corner"/>
+    <aura:attribute name="isClone" type="Boolean" default="false"
+                    description="It will be true to clone the partciluar record"/>
+    <aura:attribute name="isSubmitted" type="Boolean" default="false"
+                    description="It will be true if it has been submiited to MFG"/>
+    <aura:attribute name="isVendor" type="Boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="matrixUser" type="Object" default="{sobjectType:'Vendor_Guest_User__c'}"
+                    description="It will contain the user details"/>
+    <aura:attribute name="leadList" type="Object[]" default="{sobjectType:'lead'}"
+                    description="It will contain the lead list"/>
+    <aura:attribute name="calcList" type="Object[]" default="{sobjectType:'Calculator__c'}"
+                    description="It will contain the calculator list"/>
+    <aura:handler name="change" action="{!c.isViewChanged}" value="{!v.isView}"/>
+    <aura:handler name="change" action="{!c.goBack}" value="{!v.isSubmitted}"/>
+    <aura:attribute name="UserName" type="String" default=""/>
+
+    <div id="container">
+        <aura:if isTrue="{!v.showLoginPage}">
+            <div id="login-container">
+                <div class="slds-grid slds-grid_align-center">
+                    <div class="slds-col boxCenterDiv">
+                        <div aura:id="loginDiv" class="slds-grid slds-wrap slds-box_border">
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-align_absolute-center">
+                                <aura:if isTrue="{!v.isVendor}">
+                                    <img style="height:80%;width:80%;padding:1.5rem;"
+                                         src="{!$Resource.ANZ +'/ANZ/images/image003.png'}"/>
+                                    <aura:set attribute="else">
+                                        <aura:if isTrue="{!v.calculatorType == 'pronto'}">
+                                            <img class="CircleheaderCssPronto"
+                                                 src="{!$Resource.ANZ +'/ANZ/images/Pronto-United-logo.png'}"/>
+                                            <aura:set attribute="else">
+                                                <img style="width:45%;padding:0rem;"
+                                                     src="{!$Resource.ANZ +'/ANZ/images/chageFinanceLogo.png'}"/>
+                                            </aura:set>
+                                        </aura:if>
+                                    </aura:set>
+                                </aura:if>
+
+                            </div>
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 rightLoginDiv">
+
+                                <lightning:layout multipleRows="true" verticalAlign="center"
+                                                  class="slds-p-top_x-small ">
+                                    <lightning:layoutItem flexibility="auto" size="12">
+                                        <div aura:id="errorLayout" class="slds-text-align_center errorDiv slds-hide">
+                                            <div class="slds-p-around_xx-small">{!v.errorMessage}</div>
+                                        </div>
+                                    </lightning:layoutItem>
+                                     <div class="slds-text-heading_medium slds-p-top_large slds-m-left_small">
+                                        <div style="font-weight:bold;">Login</div>
+                                    </div>
+                                    <lightning:layoutItem flexibility="auto" size="12" padding="around-small">
+                                        <div class="slds-form-element__control  ">
+                                            <lightning:icon iconName="utility:user" class="iconClass" size="x-small"
+                                                            title=""/>
+                                            <ui:inputText class="slds-input inputboxTop"
+                                                          value="{!v.matrixUser.VEN3__Username__c}"
+                                                          placeholder="Username"/>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <lightning:icon iconName="utility:unlock" class="iconClass" size="x-small"
+                                                            title=""/>
+                                            <ui:inputSecret class="slds-input inputboxBottom"
+                                                            value="{!v.matrixUser.VEN3__Password__c}"
+                                                            placeholder="Password"/>
+                                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="auto" size="12">
+                                        <div class="slds-p-around_small">
+                                            <button type="submit" aura:id="loginButton" onclick="{!c.validate}">Log In
+                                            </button>
+                                        </div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem flexibility="auto" size="12" >
+                                            <lightning:layout class="slds-p-around_small footerTIME">
+                                                <aura:if isTrue="{!v.calculatorType == 'chase'}">
+                                                    <lightning:layoutItem flexibility="grow" >
+                                                        <div >1300 137 045</div>
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem flexibility="grow" >
+                                                        <div class="slds-float_right" >finance@chasefinance.com.au</div>
+                                                    </lightning:layoutItem>
+                                                </aura:if>
+                                                <aura:if isTrue="{!v.calculatorType == 'pronto'}">
+                                                    <lightning:layoutItem flexibility="grow" >
+                                                        <div >1300 2 776 686</div>
+                                                    </lightning:layoutItem>
+                                                    <lightning:layoutItem flexibility="grow" >
+                                                        <div class="slds-float_right" >pronto@prontounited.com.au</div>
+                                                    </lightning:layoutItem>
+                                                </aura:if>
+                                            </lightning:layout>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!or(v.openCalculator , v.showExistingRecords)}">
+            <div id="container_quoteBtn" style="background-color:white;">
+                <div id="containerdivMian" class=" slds-grid slds-wrap slds-grid_align-center">
+                    <aura:if isTrue="{!v.showExistingRecords}">
+                        <aura:if isTrue="{!v.calculatorType == 'pronto'}">
+                            <div id="detailedDiv" class="slds-page-header head"
+                                 style="width:100%;background-color: #f04c23;">
+                                <div class="slds-grid slds-grid--align-spread">
+                                    <div class="slds-col">
+                                        <aura:if isTrue="{!v.isVendor}">
+                                            <img class="matrixLogo" src="{!$Resource.ANZ +'/ANZ/images/image003.png'}"/>
+                                            <aura:set attribute="else">
+                                                <img style="width:45% !important ;background-color: white; padding: 3px;border-radius: 5px;"
+                                                     src="{!$Resource.ANZ +'/ANZ/images/Pronto-United-logo.png'}"/>
+                                            </aura:set>
+                                        </aura:if>
+                                    </div>
+                                    <div class="slds-col">
+                                        <div class="slds-dropdown-trigger slds-dropdown-trigger--click slds-is-open">
+                                            <lightning:avatar size="large" variant="circle" src="/bad/image/url.jpg"
+                                                              initials="{!v.UserName}"
+                                                              alternativeText="{!v.matrixUser.Name}" class="logoutLogo"
+                                                              onclick="{!c.openLogOutDialog}"/>
+                                            <aura:if isTrue="{!v.isLogOut}">
+                                                <div class="slds-dropdown slds-dropdown--right slds-nubbin--top-right">
+                                                    <lightning:button variant="bare" label="Log out" title="Log out"
+                                                                      onclick="{!c.logout}" iconName="utility:power"
+                                                                      class="slds-align_absolute-center"/>
+                                                </div>
+                                            </aura:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <aura:set attribute="else">
+                                <div id="detailedDiv" class="slds-page-header head"
+                                     style="width:100%; background-color: #3e8be0;">
+                                    <div class="slds-grid slds-grid--align-spread">
+                                        <div class="slds-col">
+                                            <aura:if isTrue="{!v.isVendor}">
+                                                <img class="matrixLogo"
+                                                     src="{!$Resource.ANZ +'/ANZ/images/image003.png'}"/>
+                                                <aura:set attribute="else">
+                                                    <img style="width:45% !important ;padding:0 rem;"
+                                                         src="{!$Resource.ANZ +'/ANZ/images/chageFinanceLogo.png'}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                        </div>
+                                        <div class="slds-col">
+                                            <div class="slds-dropdown-trigger slds-dropdown-trigger--click slds-is-open">
+                                                <lightning:avatar size="large" variant="circle" src="/bad/image/url.jpg"
+                                                                  initials="{!v.UserName}"
+                                                                  alternativeText="{!v.matrixUser.Name}"
+                                                                  class="logoutLogo"
+                                                                  onclick="{!c.openLogOutDialog}"/>
+                                                <aura:if isTrue="{!v.isLogOut}">
+                                                    <div class="slds-dropdown slds-dropdown--right slds-nubbin--top-right">
+                                                        <lightning:button variant="bare" label="Log out" title="Log out"
+                                                                          onclick="{!c.logout}" iconName="utility:power"
+                                                                          class="slds-align_absolute-center"/>
+                                                    </div>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </aura:set>
+                        </aura:if>
+                        <div class="slds-box--border slds-p-horizontal_xx-large slds-p-vertical--small"
+                             style="width:100%;">
+                            <div class="slds-grid slds-grid_align-end slds-p-around_large">
+                                <aura:if isTrue="{!v.calculatorType == 'pronto'}">
+                                    <div class="slds-p-horizontal_large">
+                                        <!-- <ui:button label="New Quote" iconName="utility:add" class="QuoteButtonCssChase" onclick="{!c.openCalculator}" />  -->
+                                        <lightning:button variant="brand" label="New Quote" iconName="utility:add"
+                                                          class="QuoteButtonCssprontro"
+                                                          onclick="{!c.openCalculator}"/>
+                                    </div>
+                                    <aura:set attribute="else">
+                                        <div class="slds-p-horizontal_large">
+                                            <!-- <ui:button label="New Quote" iconName="utility:add" class="QuoteButtonCssChase" onclick="{!c.openCalculator}" />  -->
+                                            <lightning:button variant="brand" label="New Quote" iconName="utility:add"
+                                                              onclick="{!c.openCalculator}"/>
+                                        </div>
+                                    </aura:set>
+                                </aura:if>
+                            </div>
+                            <div class="slds-p-horizontal_large">
+                                <div class="slds-p-horizontal_large">
+                                    <aura:if isTrue="{!v.calculatorType == 'pronto'}">
+                                        <h1 class="slds-p-left_x-small "
+                                            style="font-size: medium;background-color: #f04c23;color:white;">Existing
+                                            Quote
+                                            Calculator Records</h1>
+                                        <aura:set attribute="else">
+                                            <h1 class="slds-p-left_x-small "
+                                                style="font-size: medium;background-color: #3e8be0;color:white;">
+                                                Existing
+                                                Quote
+                                                Calculator Records</h1>
+                                        </aura:set>
+                                    </aura:if>
+
+
+                                </div>
+                                <c:DataTableVendorGuestCalculator leadList="{!v.leadList}" selectedId="{!v.selectedId}"
+                                                                  calculatorType="{!v.calculatorType}"
+                                                                  isView="{!v.isView}"/>
+                            </div>
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.openCalculator}">
+                        <div class="slds-page-header head"
+                             style="{!v.calculatorType == 'pronto' ? 'width:100%;background-color: #f04c23;' : 'width:100%; background-color: #3e8be0;'}">
+                            <div aura:id="quoteHeader" class="slds-grid slds-grid--align-spread">
+                                <div class="slds-col">
+                                    <lightning:buttonIcon class="slds-float--left" iconName="utility:back" size="large"
+                                                          variant="border-filled" title="Back"
+                                                          onclick="{!c.closeDlPopup}"
+                                                          alternativeText="Back"/>
+                                </div>
+                                <div class="slds-col slds-align_absolute-center">
+                                    <aura:if isTrue="{!v.isVendor}">
+                                        <img class="matrixLogo" src="{!$Resource.ANZ +'/ANZ/images/image003.png'}"/>
+                                        <aura:set attribute="else">
+                                            <aura:if isTrue="{!v.calculatorType == 'pronto'}">
+                                                <img style="width:45% !important ;background-color: white; padding: 3px;border-radius: 5px;"
+                                                     src="{!$Resource.ANZ +'/ANZ/images/Pronto-United-logo.png'}"/>
+                                                <aura:set attribute="else">
+                                                    <img style="width:45% !important ;padding:0rem;"
+                                                         src="{!$Resource.ANZ +'/ANZ/images/chageFinanceLogo.png'}"/>
+                                                </aura:set>
+                                            </aura:if>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                                <div class="slds-col slds-float_right">
+                                    <div class="slds-dropdown-trigger slds-dropdown-trigger--click slds-is-open">
+                                        <aura:if isTrue="{!v.isVendor}">
+
+                                            <aura:set attribute="else">
+                                                <lightning:avatar size="large" variant="circle" src="/bad/image/url.jpg"
+                                                                  initials="{!v.UserName}"
+                                                                  alternativeText="{!v.matrixUser.Name}"
+                                                                  class="logoutLogo"
+                                                                  onclick="{!c.logOutButton}"/>
+                                                <aura:if isTrue="{!v.Logout}">
+                                                    <div class="slds-dropdown slds-dropdown--right slds-nubbin--top-right">
+                                                        <lightning:button variant="bare" label="Log out" title="Log out"
+                                                                          onclick="{!c.logout}" iconName="utility:power"
+                                                                          class="slds-align_absolute-center"/>
+                                                    </div>
+                                                </aura:if>
+                                            </aura:set>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-float--right">
+                                    <aura:if isTrue="{!v.isVendor}">
+                                        <aura:if isTrue="{!v.showSettings}">
+                                            <lightning:buttonIcon class="slds-float--right" iconName="utility:settings"
+                                                                  size="large" variant="border-filled" title="Setting"
+                                                                  onclick="{!c.openSettingPopup}"
+                                                                  alternativeText="Setting"/>
+                                        </aura:if>
+                                        <lightning:buttonIcon class="slds-float--right slds-m-right_x-small"
+                                                              iconName="utility:info" size="large"
+                                                              variant="border-filled"
+                                                              title="Disclaimer" onclick="{!c.disclaimerPopup}"
+                                                              alternativeText="Disclaimer"/>
+                                    </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%;">
+                            <c:SupplierQuoteCalculator aura:id="SupplierMatrixCalculator" isVendor="{!v.isVendor}"
+                                                       receiveRecordId="{!v.recordId}"
+                                                       isMatrixGuestUser="true" matrixUser="{!v.matrixUser}"
+                                                       editCalId="{!v.editRecordId}" isView="{!v.isView}"
+                                                       isClone="{!v.isClone}" isSubmitted="{!v.isSubmitted}"
+                                                       selectedId="{!v.selectedId}"
+                                                       calculatorType="{!v.calculatorType}"/>
+                            <aura:if isTrue="{!!v.isView}">
+                                <div class="slds-grid slds-grid_align-end slds-border_top" style="width: 100%;">
+                                    <div class="slds-col slds-p-around_x-small">
+                                        <lightning:button variant="brand" label="Save" iconName="utility:save"
+                                                          class="" onclick="{!c.saveData}"/>
+                                        <lightning:button variant="destructive" label="Reset"
+                                                          iconName="utility:close" class=""
+                                                          onclick="{!c.clearDataPopup}"/>
+                                    </div>
+                                </div>
+                            </aura:if>
+                            <aura:if isTrue="{!v.editRecordId != ''}">
+                                <div class="slds-grid slds-grid_align-end" style="width: 100%;">
+                                    <div class="slds-col slds-p-around_x-small">
+                                    </div>
+                                </div>
+                            </aura:if>
+                            <div>
+                            </div>
+
+                        </div>
+
+                    </aura:if>
+                </div>
+            </div>
+        </aura:if>
+        <div class="slds-grid slds-wrap slds-grid--align-end slds-p-around--large" style="{!v.showLoginPage || v.openCalculator  ? 'position:absolute; bottom: 5px;width: 100%;':'' }">
+            <div class="slds-col slds-size--1-of-1" style="width: 9%">Powered by</div>
+            <div class="slds-col slds-size--1-of-1">
+                <img class="slds-float--right" style="width: 9%"
+                     src="{!$Resource.ANZ +'/ANZ/images/Vendor-Calculator-full-logo.png'}"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

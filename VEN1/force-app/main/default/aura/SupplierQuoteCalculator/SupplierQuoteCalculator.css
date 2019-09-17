@@ -1,0 +1,182 @@
+.THIS {
+}
+.THIS .btnCornerss{
+    font-family: Montserrat,sans-serif;
+    width: 100%;
+}
+.THIS .fldWidth {
+    width: 111% !important;
+}
+.THIS .settingBtn{
+    margin-left: 60%;
+}
+
+.THIS .inputMultiplier
+{
+    width:70% !important;
+}
+
+.THIS .disabledColor
+{
+    background-color: white !important;
+}
+.THIS .icn svg:hover{
+    fill:gray;
+}
+.THIS h1{
+    padding: 3px;
+}
+.THIS .head{
+    color: token(colorTextButtonBrand) !important;
+    background-color: token(colorBrand) !important;
+}
+.THIS .popupsettingclass{
+    width: 100% !important;
+    max-width: 100rem !important;
+}
+
+@media only screen and (max-width: 650px) {
+    .THIS .Header {
+        white-space: inherit !important;
+    }
+    .THIS .fldWidth {
+        width: 100% !important;
+    }
+
+}
+@media print {
+    .THIS.section-not-to-print
+    {
+        visibility: hidden;
+    }
+    .THIS.section-to-print {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+.THIS .setLabelClass{
+    color: #696969;
+    font-size: .75rem;
+    line-height: 1.5;
+}
+
+.THIS .setInputHeight {
+    min-height: 0 !important;
+}
+
+.THIS .disclaimerWidth{
+    width: 100% !important;
+}
+
+.THIS .slds-accordion__summary {
+
+    background-color: whitesmoke;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #e4e1e1;
+}
+
+.THIS .slds-accordion__content {
+    border: 1px solid #e4e1e1;
+}
+
+.THIS .slds-accordion__summary-action {
+    margin-left: 15px;
+    font-size: 14px;
+}
+.THIS .slds-accordion__section {
+    padding: 0;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary {
+    margin-bottom: 0;
+    color: token(colorTextButtonBrand) !important;
+    background-color: token(colorBrand) !important;
+}
+.THIS .slds-is-open > .slds-accordion__summary .slds-button :hover {
+    color: white;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary .slds-button :active {
+    color: white;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary .slds-button :visited {
+    color: white;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary .slds-button {
+    color: white;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary svg :hover {
+    fill: white;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary svg :active {
+    fill: white;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary svg :visited {
+    fill: white;
+}
+
+.THIS .slds-is-open > .slds-accordion__summary svg {
+    fill: white;
+}
+.THIS .buttonColor svg{
+    fill: #fff!important;
+}
+.THIS .slds-dropdown-trigger {
+    min-width:100%;
+}
+.THIS .SectionHeader{
+   background-color: #3e8be0 !important;
+   padding: 4px !important;
+   font-weight: bold !important;
+   font-size: 14px !important;
+   border-radius: 3px !important;
+   color: white !important;
+}
+.THIS .field{
+  padding: 3px !important;
+  border-bottom: 1px solid #dce4ec !important;
+  border-radius: 2px !important;
+}
+.THIS .tabsetCSS .slds-tabs_default__item {
+    min-width:20%;
+    text-align : center;
+}
+.THIS .spinnerCss{
+    z-index: 10000;
+    position: fixed;
+}
+.THIS .labelclass .slds-form-element__legend{
+  font-weight: 30% !important;
+}
+.THIS .labelclass1 .slds-form-element__legend{
+      font-weight: inherit;
+      font-size: 1em;
+      color: rgb(22, 50, 92);
+}
+.THIS .riskAppetiteWidth .slds-form-element__control .slds-radio_button-group {
+    min-width: 100% !important;
+}
+
+.THIS .riskAppetiteWidth .slds-form-element__control .slds-radio_button-group .slds-radio_button {
+    min-width: 16.67% !important;
+    display: grid !important;
+}
+
+.THIS .riskAppetiteWidth .slds-form-element__control .slds-radio_button-group .slds-radio_button .slds-radio_button__label {
+    min-width: 100% !important;
+}
+.THIS .Cssprontro{
+    background-color: #f04c23 !important;
+    border-color: #f04c23 !important;
+}
+.THIS .fontSize .slds-form-element__legend{
+    font-weight: normal !important;
+  }
