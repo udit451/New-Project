@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Strength of Relationship --></label>
+    <name>Strength_of_Relationship__c</name>
+    <picklistValues>
+        <masterLabel>Moderate</masterLabel>
+        <translation><!-- Moderate --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Strong</masterLabel>
+        <translation><!-- Strong --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Terminated/Ended</masterLabel>
+        <translation><!-- Terminated/Ended --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Weak</masterLabel>
+        <translation><!-- Weak --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

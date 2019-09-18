@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Relationships</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Relationships</value>
+    </caseValues>
+    <recordTypes>
+        <label><!-- Account Relationship --></label>
+        <name>Account_Relationship</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Contact Relationship --></label>
+        <name>Contact_Relationship</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Opportunity Relationship --></label>
+        <name>Opportunity_Relationship</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Security Ownership --></label>
+        <name>Security_Ownership</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

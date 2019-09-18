@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Chase Calculator Record</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Chase Calculator Records</value>
+    </caseValues>
+    <layouts>
+        <layout>Quote Calculator Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Chase Finance --></label>
+        <name>Chase_Finance</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

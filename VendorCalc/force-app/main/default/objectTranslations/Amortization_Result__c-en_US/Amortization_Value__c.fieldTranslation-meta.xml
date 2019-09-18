@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Amortization Value --></label>
+    <name>Amortization_Value__c</name>
+    <picklistValues>
+        <masterLabel>Non Published</masterLabel>
+        <translation><!-- Non Published --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Published</masterLabel>
+        <translation><!-- Published --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

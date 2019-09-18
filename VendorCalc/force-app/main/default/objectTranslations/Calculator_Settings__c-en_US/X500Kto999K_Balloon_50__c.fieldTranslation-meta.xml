@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- 500Kto999K Balloon(50) --></label>
+    <name>X500Kto999K_Balloon_50__c</name>
+</CustomFieldTranslation>
